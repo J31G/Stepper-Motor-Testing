@@ -32,19 +32,26 @@ module.exports.Stepper = class Stepper {
     return this;
   }
 
-  move(steps, delay, amount) {
-    let amountCount = 0;
-    const id = setInterval(() => runStepper(), delay);
+  move(delay, steps, wait) {
+
+    const running = new Promise((resolve) => {
+      let amountCount = 0;
+      const id = setInterval(() => runStepper(), delay);
   
-    const runStepper = () => {
-      if (amountCount == amount) return clearInterval(id);
+      const runStepper = () => {
+        if (amountCount == steps) {
+          clearInterval(id);
+          setTimeout(() => { return resolve(this); }, wait);
+        }
+        console.log(amountCount);
+        amountCount++;
+        this.step(2);
+      }
+    });
 
-      amountCount++;
-      this.step(steps);
-    }
-
-    return this;
+    return running;
   }
+
 }
 
 module.exports.board = board;

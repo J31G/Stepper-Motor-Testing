@@ -2,14 +2,13 @@ const { Stepper, board } = require('./modules/stepper');
 
 const stepper1 = new Stepper(2, 5, 6400);
 
-board.on("ready", () => {
+const speed = 1;            // LOWER BEING FASTER
+const steps = 3200;         // AMOUNT OF STEPS TO MOVE
+const waitBetween = 5000;   // AMOUNT OF TIME TO WAIT BETWEEN
 
-  // stepper1.cw().move(64, 100, 100);
+board.on("ready", async () => {
 
-  const amountTakesToLetter = 6400;
-  const delay = 500;
-  const example = delay / 50;
-
-  stepper1.cw().move(amountTakesToLetter / example, delay, example);
+  await stepper1.cw().move(speed, steps, waitBetween);
+  await stepper1.ccw().move(speed, steps, waitBetween);
 
 });
