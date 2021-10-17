@@ -7,14 +7,20 @@ const stepper = new Stepper({
 });
 
 board.on("ready", async () => {
+
+  // Init stepper
+  stepper.init()
+
+  // First letter
   await stepper
-    .init()
     .move({
       speed: { X: 1, Y: 1 },
       steps: { X: 3200 / 2, Y: 3200 },
       direction: { X: 'up', Y: 'left' },
       wait: 1000
-    })
+    });
+
+  // Second letter
   await stepper
     .move({
       speed: { X: 1, Y: 2 },
