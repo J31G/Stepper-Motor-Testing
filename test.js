@@ -9,25 +9,27 @@ const stepper = new Stepper({
 board.on("ready", async () => {
 
   // Init stepper
-  stepper.init()
+  await stepper.init();
 
   // First letter
   await stepper
     .move({
-      speed: { X: 1, Y: 1 },
+      speed: { X: 0, Y: 0 },
       steps: { X: 3200 / 2, Y: 3200 },
-      direction: { X: 'up', Y: 'left' },
+      direction: { X: 'up', Y: 'right' },
       wait: 1000
     });
 
+    stepper.location();
+
   // Second letter
-  await stepper
+  /* await stepper
     .move({
-      speed: { X: 1, Y: 2 },
+      speed: { X: 0, Y: 0 },
       steps: { X: 3200 / 2, Y: 3200 },
-      direction: { X: 'down', Y: 'right' },
+      direction: { X: 'down', Y: 'left' },
       wait: 5000
-    });
+    }); */
 
 });
 
